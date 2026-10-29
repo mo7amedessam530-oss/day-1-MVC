@@ -1,0 +1,35 @@
+﻿@model Student
+
+@{
+    ViewData["Title"] = "Student Details";
+}
+
+<div class="container mt-4">
+    <h2>Student Details</h2>
+    <div class="card mt-3">
+        <div class="card-body">
+            <h4 class="card-title">Name: @Model.Name</h4>
+            <p class="card-text"><strong>ID:</strong> @Model.Id</p>
+            <p class="card-text"><strong>Age:</strong> @Model.Age</p>
+            <p class="card-text"><strong>Department:</strong> @(Model.Department?.Name ?? "No Dept")</p>
+
+            <hr />
+            <h5>Enrolled Courses & Grades:</h5>
+            @if (Model.StuCrsReses != null && Model.StuCrsReses.Any())
+            {
+                <ul>
+                    @foreach (var item in Model.StuCrsReses)
+                    {
+                        <li>@item.Course?.Name - Grade: @item.Grade</li>
+                    }
+                </ul>
+            }
+            else
+            {
+                <p>No courses registered yet.</p>
+            }
+
+            <a asp-action="ShowAll" class="btn btn-secondary mt-3">Back to List</a>
+        </div>
+    </div>
+</div>
